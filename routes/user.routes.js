@@ -9,12 +9,12 @@ router.get('/',
             const database = MyDB.db('MyDB');
             const info = await database.collection('users');
             const users = await info.find().toArray();
-            console.log(users)
-            response.success(req,res,users,200)
-            // res.json({users})
+            
+            res.json({users})
 
         } catch {
-            throw new Error('Error papa')
+            response.error(req, res)
+
         } finally {
             await MyDB.close()
         }
