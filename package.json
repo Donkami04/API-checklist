@@ -1,0 +1,17 @@
+{
+  "name": "small-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.api.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "4.12",
+    "nodemon": "^2.0.20"
+  }
+}
