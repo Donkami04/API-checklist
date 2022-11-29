@@ -1,7 +1,7 @@
 const express = require('express');
 const response = require('../middleware/response');
 const router = express.Router();
-const UserService = require('../services/user.service')
+const UserService = require('./user.controller')
 const service = new UserService();
 
 router.get('/', 

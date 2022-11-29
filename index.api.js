@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
-const users = require('./routes/user.routes');
-const tasks = require('./routes/task.routes');
+const users = require('./users/user.routes');
 const config = require('./config/config');
 
 app.use(express.json());
@@ -16,4 +15,3 @@ app.listen(config.api.port, () => {
 });
 
 app.use('/api/users', users);
-app.use('/api/tasks', tasks);
