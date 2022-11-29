@@ -1,4 +1,6 @@
-// empieza
+const express = require('express');
+const app = express();
+
 const { MongoClient } = require("mongodb");
 const config = require('../config/config');
 

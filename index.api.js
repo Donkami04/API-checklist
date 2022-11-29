@@ -1,15 +1,8 @@
 const express = require('express');
 const app = express();
 const users = require('./routes/user.routes');
-const tasks = require('./routes/tasks.routes');
+const tasks = require('./routes/task.routes');
 const config = require('./config/config');
-// const { run } = require('./mongodb/index');
-
-    
-
-
-
-// termina
 
 app.use(express.json());
 
