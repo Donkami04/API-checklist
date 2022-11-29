@@ -6,7 +6,7 @@ const config = require('./config/config');
 app.use(express.json());
 
 app.get('/api', (req, res) => {
-    res.send('Hello User')
+    res.send('Hello There')
 });
 
 

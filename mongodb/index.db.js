@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
-
-const { MongoClient } = require("mongodb");
+const routerMongoDB = require('./mongo.routes');
 const config = require('../config/config');
 
-const uri = config.mongodb.uri;
-const MyDB = new MongoClient(uri);
 
+app.use(express.json());
 
-module.exports = { MyDB }
+app.use('/api/', routerMongoDB);
+
+app.listen(config.mongodb.port, () => {
+    console.log(`MongoDB Listening on port ${config.mongodb.port}`)
+});
+
