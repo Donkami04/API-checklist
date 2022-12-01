@@ -6,27 +6,16 @@ const router = express.Router();
 const UserService = require('./user.controller');
 const service = new UserService();
 
-router.get('/users', 
-    async function findAll (req, res, next) {
-        try {
-            const allUsers = await service.findAll();
-            res.json(allUsers)
-        } catch (error) {
-            // response.error(req, res, "Internal Error", 500 );
-            next(error);
-            } 
-        });
+router.get('/users', findUsers);
 
-router.get('/users/:id', 
-    async function findOne (req, res, next) {
-        try {
-            const oneUser = await service.findOne(req.params.id);
-            res.json(oneUser)
-        } catch (error) {
-            // response.error(req, res, "Internal Error", 500 );
-            console.error()
-            next(error);
-            } 
-        });
+async function findUsers (req, res, next) {
+    try {
+        const allUsers = await service.findUsers(req.params.id);
+        res.json(allUsers)
+    } catch (error) {
+        // response.error(req, res, "Internal Error", 500 );
+        next(error);
+        } 
+    };
 
 module.exports = router;
