@@ -19,14 +19,14 @@ const database = MyDB.db('MyDB');
 //   }
 //   run().catch(console.dir);
 
-async function getUsers(nameCollection) {
+async function getUsers () {
 
-        const info = database.collection(nameCollection);
-
+        const info = database.collection('users');
         const projection = { password: 0}
         const users = await info.find().project(projection).toArray();
         await MyDB.close();
         return users;
+        
 };
 
 module.exports = {getUsers}

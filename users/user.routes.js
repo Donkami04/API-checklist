@@ -1,16 +1,31 @@
 const express = require('express');
-const response = require('../middleware/response');
 const router = express.Router();
-const UserService = require('./user.controller')
+
+// const response = require('../middleware/response');
+
+const UserService = require('./user.controller');
 const service = new UserService();
 
-router.get('/', 
-    async function getusers (req, res, next) {
+router.get('/users', 
+    async function findAll (req, res, next) {
         try {
-            const allUsers = await service.getusers();
-            res.json({allUsers})
-            } catch {
-            response.error(req, res)
+            const allUsers = await service.findAll();
+            res.json(allUsers)
+        } catch (error) {
+            // response.error(req, res, "Internal Error", 500 );
+            next(error);
+            } 
+        });
+
+router.get('/users/:id', 
+    async function findOne (req, res, next) {
+        try {
+            const oneUser = await service.findOne(req.params.id);
+            res.json(oneUser)
+        } catch (error) {
+            // response.error(req, res, "Internal Error", 500 );
+            console.error()
+            next(error);
             } 
         });
 
