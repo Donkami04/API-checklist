@@ -9,23 +9,32 @@ class UserService {
     
     async findUsers (id) {
         if (!id) {
-        const users = await userModel.find({}) 
-        return users
-        };
-        const user = await userModel.find({})
-    
+        const users = await userModel.find();
+        return users;
+        } else {
+            const user = await userModel.findById(id);
+            return user;    
+        }
     };
 
-    
+    async createUser (info) {
+        const newUser = new userModel({
+            name: info.name,
+            tasks: info.tasks,
+        });
+        await newUser.save();
+        return newUser;
+    };
 
-    // async findOne (id) {
-    //     const info = database.collection('users');
-    //     const projection = { password: 0}
-    //     const query = { age: id }
-    //     const oneUser = await info.findOne(query);
-    //     return oneUser;
-    // };
+    async updateUser (id, info) {
+        const user = await userModel.findByIdAndUpdate(id, info, {returnDocument:'after'})
+        return user;
+    };
 
+    async deleteUser (id) {
+        const user = await userModel.findOneAndDelete(id);
+        return user;
+    }
 };
 
 

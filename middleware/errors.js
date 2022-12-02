@@ -6,7 +6,6 @@ function errors(err, req, res, next) {
     console.error(err.stack)
     res.status(500).send('Something broke!');
 
-    response.error(req, res, message)
 };
 
 module.exports = errors;
