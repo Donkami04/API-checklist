@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const response = require('./../middleware/response')
 
 
 const UserService = require('./user.controller');
@@ -20,21 +21,10 @@ async function findUsers (req, res, next) {
         } 
 };
 
-async function deleteUser (req, res, next) {
-    try {
-        const user = await service.deleteUser(req.params.id);
-        // crear mensaje JSON para devolver cuando el usuario sea eliminado
-        res.json(user);
-    } catch (error) {
-        next(error);
-    }
-};
-
 async function createUser (req, res, next) {
     try {
         const user = await service.createUser(req.body);
-        // crear mensaje JSON para devolver cuando el usuario sea eliminado
-        res.json(user);
+        response.success(req, res, user, 200)
     } catch (error) {
         next(error);
     }
@@ -42,14 +32,23 @@ async function createUser (req, res, next) {
 
 async function updateUser (req, res, next) {
     try {
-        console.log(req.body, "entro la info")
         const user = await service.updateUser(req.params.id, req.body);
-        // crear mensaje JSON para devolver cuando el usuario sea eliminado
         res.json(user);
     } catch (error) {
         next(error);
     }
 };
+
+async function deleteUser (req, res, next) {
+    try {
+        await service.deleteUser(req.params.id);
+        response.success(req, res, 'The user was eliminated successfully', 200)
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 
 
 module.exports = router;

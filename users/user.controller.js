@@ -1,7 +1,6 @@
 const connection = require('./user.database');
 const userModel = require('./user.schema');
 const mongoose = require('mongoose')
-
 connection();
 
 class UserService {
@@ -20,6 +19,8 @@ class UserService {
     async createUser (info) {
         const newUser = new userModel({
             name: info.name,
+            email: info.email,
+            phone: info.phone,
             tasks: info.tasks,
         });
         await newUser.save();
@@ -32,9 +33,11 @@ class UserService {
     };
 
     async deleteUser (id) {
-        const user = await userModel.findOneAndDelete(id);
+        const user = await userModel.findByIdAndRemove(id);
         return user;
     }
+
+    
 };
 
 

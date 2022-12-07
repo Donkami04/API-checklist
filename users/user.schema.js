@@ -7,10 +7,24 @@ const UserSchema = new Schema ({
         type: String,
         required: true,
     },
-    tasks: []
+    email: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: Number,
+        required: true,
+    },
+    tasks: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'tasks'
+    }]
 
 });
+
+
 const userModel = mongoose.model('users', UserSchema);
+
+
 
 module.exports = userModel ;
 
