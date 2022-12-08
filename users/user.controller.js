@@ -1,5 +1,6 @@
-const connection = require('./user.database');
+const connection = require('../database/database');
 const userModel = require('./user.schema');
+const taskModel = require('../tasks/task.schema');
 const mongoose = require('mongoose')
 connection();
 
@@ -34,6 +35,8 @@ class UserService {
 
     async deleteUser (id) {
         const user = await userModel.findByIdAndRemove(id);
+        // The below line remove the user from the tasks
+        await taskModel.updateMany({responsible: id}, {$pullAll: {responsible:[id]}});
         return user;
     }
 

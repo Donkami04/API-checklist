@@ -16,7 +16,9 @@ const UserSchema = new Schema ({
         required: true,
     },
     tasks: [{
-        type: mongoose.Schema.Types.ObjectId, ref: 'tasks'
+        type: mongoose.Schema.Types.ObjectId, ref: 'tasks',
+        required: false,
+
     }]
 
 });

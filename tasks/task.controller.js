@@ -1,6 +1,8 @@
-const connection = require('./task.database');
+const connection = require('../database/database');
 const taskModel = require('./task.schema');
-const mongoose = require('mongoose')
+const userModel = require('../users/user.schema');
+const mongoose = require('mongoose');
+const db = require('mongodb');
 
 connection();
 
@@ -37,12 +39,9 @@ class TaskService {
     };
 
     async deleteTask (id) {
-
         const task = await taskModel.findByIdAndRemove(id);
-        fetch('http://localhost:3001/api/users')
-        
-            // .then(response => response.json())
-            // .then(data => console.log(data))
+        // The below line remove the task from the users
+        await userModel.updateMany({tasks: id}, {$pullAll: {tasks:[id]}});
         return task;
     }
 };

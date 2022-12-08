@@ -12,9 +12,10 @@ const TaskSchema = new Schema ({
         type: String,
         required: true,
     },
-    responsible: {
+    responsible: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'users',
-    },
+        required: false
+    }],
     dateCreation: {
         type: Date, default: Date.now 
     },
